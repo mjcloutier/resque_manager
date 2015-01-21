@@ -11,4 +11,5 @@
  *= require 'resque_manager/resque/resque_reset'
  *= require 'resque_manager/resque/resque'
  *= require 'resque_manager/resque_cleaner/cleaner'
+ *= require 'resque_manager/resque/mobile'
  */
