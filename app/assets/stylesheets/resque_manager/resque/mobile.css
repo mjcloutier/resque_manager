@@ -16,14 +16,19 @@ and also iPads specifically.
     left: -9999px;
   }
 
-  tr { border: 1px solid #ccc; }
+  tr { margin-top: 20px; }
+
+  tr:nth-of-type(odd) {
+    background: #eee;
+  }
 
   td {
     /* Behave  like a "row" */
     border: none;
     border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50%;
+    padding-left: 50% !important;
+    word-break: break-all;
   }
 
   td:before {

@@ -9,35 +9,45 @@
 <p class='intro'>These are recent jobs created with the JobWithStatus class</p>
 <p class='sub'>Showing <%=@start%> to <%= @start + 20 %> of <b><%= @size %></b> statuses</p>
 <table>
-  <tr>
-    <th>ID</th>
-    <th style="width:40%">Name</th>
-    <th>Status</th>
-    <th>Last Updated</th>
-    <th class="progress">% Complete</th>
-    <th>Message</th>
-    <th>Kill</th>
-  </tr>
-  <% unless @statuses.empty? %>
-    <% @statuses.each do |status| %>
+  <thead>
     <tr>
-      <td><%= link_to(status.uuid, status_resque_path(uuid: status.uuid)) %></td>
-      <td><%= status.name %></td>
-      <td class="status status-<%= status.status %>"><%= status.status %></td>
-      <td class="time"><%= format_time(Time.zone.parse(status.time.to_s)) %></td>
-      <td class="progress">
-        <div class="progress-bar" style="width:<%= status.pct_complete %>%">&nbsp;</div>
-        <div class="progress-pct"><%= status.pct_complete ? "#{status.pct_complete}%" : '' %></div>
-      </td>
-      <td><%= status.message.to_s.html_safe %></td>
-      <td><% if status.killable? %><%= button_to('Kill', kill_resque_path(uuid: status.uuid), :class => 'kill', method: :delete) %><% end %></td>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Last Updated</th>
+      <th>% Complete</th>
+      <th>Message</th>
+      <th>Kill</th>
     </tr>
+  </thead>
+  <tbody>
+    <% unless @statuses.empty? %>
+      <% @statuses.each do |status| %>
+        <tr>
+          <td><%= link_to(status.uuid, status_resque_path(uuid: status.uuid)) %></td>
+          <td><%= status.name %></td>
+          <td class="status status-<%= status.status %>"><%= status.status %></td>
+          <td class="time"><%= format_time(Time.zone.parse(status.time.to_s)) %></td>
+          <td class="progress">
+            <div class="progress-bar" style="width:<%= status.pct_complete %>%">&nbsp;</div>
+            <div class="progress-pct"><%= status.pct_complete ? "#{status.pct_complete}%" : '' %></div>
+          </td>
+          <td><%= status.message.to_s.html_safe %></td>
+          <td>
+            <% if status.killable? %>
+              <%= button_to('Kill', kill_resque_path(uuid: status.uuid), :class => 'kill', method: :delete) %>
+            <% else %>
+              &nbsp;
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="7" class='no-data'>No Statuses right now...</td>
+      </tr>
     <% end %>
-  <% else %>
-  <tr>
-    <td colspan="7" class='no-data'>No Statuses right now...</td>
-  </tr>
-  <% end %>
+  </tbody>
 </table>
 
 <% unless @statuses.empty? %>

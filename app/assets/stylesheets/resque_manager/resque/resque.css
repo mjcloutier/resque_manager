@@ -32,8 +32,10 @@ body { padding:0; margin:0; }
 #main span.hl { background:#efefef; padding:2px;}
 #main h1 { margin:10px 0; font-size:190%; font-weight:bold; color:#ce1212;}
 #main h2 { margin:10px 0; font-size:130%;}
-#main table { width:100%; border-collapse: collapse; }
-#main table tr td, #main table tr th { border:1px solid #ccc; padding:6px;}
+#main table { width:100%; }
+#main table tr td, #main table tr th { border:1px solid #ccc; padding:6px; }
+#main table tr:nth-of-type(1) a { word-break: break-all; }
+#main table tr:nth-of-type(2) { word-break: break-all; }
 #main table tr th { background:#efefef; color:#888; font-size:80%; font-weight:bold;}
 #main table tr td.no-data { text-align:center; padding:40px 0; color:#999; font-style:italic; font-size:130%;}
 #main a { color:#111;}
