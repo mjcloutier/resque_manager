@@ -20,8 +20,6 @@ namespace :resque do
     Thread.current[:queues] = mqueue
     Thread.current[:path] = worker_path
     mworker = Resque::Worker.new(mqueue)
-    mworker.verbose = true #ENV['LOGGING'] || ENV['VERBOSE']
-    mworker.very_verbose = true #ENV['VVERBOSE']
 
     if ENV['PIDFILE']
       File.open(ENV['PIDFILE'], 'w') { |f| f << mworker.pid }
