@@ -31,8 +31,6 @@ namespace :resque do
           Thread.current[:queues] = queue
           Thread.current[:path] = worker_path
           worker = Resque::Worker.new(queue)
-          worker.verbose = ENV['LOGGING'] || ENV['VERBOSE']
-          worker.very_verbose = ENV['VVERBOSE']
         rescue Resque::NoQueueError
           abort "set QUEUE env var, e.g. $ QUEUE=critical,high rake resque:work"
         end
